@@ -1,4 +1,4 @@
-package com.ziyu.oaservice.controller;
+package com.oliiyu.userservice.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
