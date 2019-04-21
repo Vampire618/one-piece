@@ -1,0 +1,25 @@
+server:
+  port: 8810
+
+spring:
+  application:
+    name: zuul-service
+
+zuul:
+  routes:
+    api-a:
+#    以/api-a/ 开头的请求都转发给service-ribbon服务
+      path: /api-a/**
+      serviceId: service-ribbon
+#     以/api-b/开头的请求都转发给service-feign服务
+    api-b:
+      path: /api-b/**
+      serviceId: service-feign
+
+eureka:
+  client:
+    service-url:
+#    指定服务注册中心的地址
+      defaultZone: http://localhost:8800/eureka/
+
+
