@@ -1,9 +1,17 @@
 server:
-  port: 8881
+  port: 8770
 
 spring:
+  application:
+    name: user-service
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/oa?useUnicode=true&characterEncoding=utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
+
+eureka:
+  client:
+    service-url:
+#    指定服务注册中心的地址
+      defaultZone: http://localhost:8761/eureka/
