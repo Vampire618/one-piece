@@ -8,13 +8,9 @@ spring:
 zuul:
   routes:
     api-a:
-#    以/api-a/ 开头的请求都转发给service-ribbon服务
+#    以/api-a/ 开头的请求都转发给user-service服务
       path: /api-a/**
-      serviceId: service-ribbon
-#     以/api-b/开头的请求都转发给service-feign服务
-    api-b:
-      path: /api-b/**
-      serviceId: service-feign
+      serviceId: user-service
 
 eureka:
   client:
