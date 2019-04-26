@@ -5,6 +5,7 @@ import org.bouncycastle.util.encoders.Hex;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 /**
  * @Auther: oliiyu
@@ -50,6 +51,14 @@ public class MD5Util {
     }
 
     public static void main(String[] args) {
-        System.out.println(encodePassword("admin", "xxxx"));
+        String salt = "";
+        try{
+            SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+            salt = random.nextInt() + "";
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        System.out.println(encodePassword("admin", salt));
     }
 }
