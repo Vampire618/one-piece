@@ -5,13 +5,24 @@ spring:
   application:
     name: user-service
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/oa?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://95.163.194.40:32081/onepiecedb?useUnicode=true&characterEncoding=utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 123456
+    username: dbuser
+    password: Remote_user
 
 eureka:
   client:
     service-url:
-#    指定服务注册中心的地址
+      #指定服务注册中心的地址
       defaultZone: http://localhost:8761/eureka/
+
+orm:
+  mybatis:
+    only: true
+
+mybatis:
+  #实体类所做包
+  type-aliases-package: com.oliiyu.userservice.repository.entity
+  config-locations: classpath:mybatis-config.xml
+  #mapper.xml所在位置
+  mapper-locations: classpath:mappers/*.xml
