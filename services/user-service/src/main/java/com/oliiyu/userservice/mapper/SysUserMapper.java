@@ -9,4 +9,8 @@ import java.util.List;
 public interface SysUserMapper {
 
     List<SysUserEntity> getAllSysUser();
+
+    SysUserEntity findBySysUsername(String username);
+
+    SysUserEntity addSysUser(SysUserEntity sysUserEntity);
 }
