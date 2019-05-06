@@ -1,11 +1,13 @@
 package com.oliiyu.userservice.controller;
 
+import com.oliiyu.userservice.common.security.JwtAuthenticationRequest;
+import com.oliiyu.userservice.common.security.JwtAuthenticationResponse;
+import com.oliiyu.userservice.repository.entity.SysUserEntity;
 import com.oliiyu.userservice.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @Auther: oliiyu
- * @Date: 2019/5/5 15:47
- * @Description:
+ * Author: Oliiyu
+ * Date: 2019/5/5 15:47
+ * Description:
  */
 @RestController
 public class AuthController {
@@ -48,7 +50,7 @@ public class AuthController {
     }
 
     @RequestMapping(value = "${jwt.route.authentication.register}", method = RequestMethod.POST)
-    public User register(@RequestBody User addedUser) throws AuthenticationException {
+    public SysUserEntity register(@RequestBody SysUserEntity addedUser) throws AuthenticationException {
         return authService.register(addedUser);
     }
 }

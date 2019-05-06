@@ -26,3 +26,16 @@ mybatis:
   config-locations: classpath:mybatis-config.xml
   #mapper.xml所在位置
   mapper-locations: classpath:mappers/*.xml
+
+
+# JWT
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  tokenHead: "Bearer "
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
+      register: "auth/register"

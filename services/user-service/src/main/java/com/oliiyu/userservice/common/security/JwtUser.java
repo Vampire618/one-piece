@@ -1,4 +1,4 @@
-package com.oliiyu.userservice.common;
+package com.oliiyu.userservice.common.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
@@ -6,41 +6,34 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 import java.util.Collection;
-import java.util.Date;
 
 /**
- * @Auther: oliiyu
- * @Date: 2019/5/5 15:37
- * @Description:
+ * Author: oliiyu
+ * Date: 2019/5/5 15:37
+ * Description:
+ * Spring Security需要我们实现几个东西，第一个是UserDetails：这个接口中规定了用户的几个必须要有的方法，所以我们创建一个JwtUser类来实现这个接口。
+ * 为什么不直接使用User类？
+ * 因为这个UserDetails完全是为了安全服务的，它和我们的领域类可能有部分属性重叠，但很多的接口其实是安全定制的，所以最好新建一个类
  */
 public class JwtUser implements UserDetails {
 
     private final String id;
     private final String username;
     private final String password;
-    private final String email;
-    private final Collection<? extends GrantedAuthority> authorities;
-    private final Date lastPasswordResetDate;
 
     public JwtUser(
             String id,
             String username,
-            String password,
-            String email,
-            Collection<? extends GrantedAuthority> authorities,
-            Date lastPasswordResetDate) {
+            String password) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.email = email;
-        this.authorities = authorities;
-        this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
     //返回分配给用户的角色列表
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return null;
     }
 
     @JsonIgnore
@@ -87,9 +80,4 @@ public class JwtUser implements UserDetails {
         return true;
     }
 
-    // 这个是自定义的，返回上次密码重置日期
-    @JsonIgnore
-    public Date getLastPasswordResetDate() {
-        return lastPasswordResetDate;
-    }
 }

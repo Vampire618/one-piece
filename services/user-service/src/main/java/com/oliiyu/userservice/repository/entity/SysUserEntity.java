@@ -6,8 +6,8 @@ import java.util.Date;
 public class SysUserEntity {
 
     private String id;
-    private String userCode;
-    private String userName;
+    private String usercode;
+    private String username;
     private String password;
     private String salt;
     private String isLocked;
@@ -22,20 +22,20 @@ public class SysUserEntity {
         this.id = id;
     }
 
-    public String getUserCode() {
-        return userCode;
+    public String getUsercode() {
+        return usercode;
     }
 
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
+    public void setUsercode(String usercode) {
+        this.usercode = usercode;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -78,11 +78,11 @@ public class SysUserEntity {
         this.gmtModified = gmtModified;
     }
 
-    public SysUserEntity(String id, String userCode, String userName, String password, String salt,
+    public SysUserEntity(String id, String usercode, String username, String password, String salt,
                          String isLocked, Date gmtCreate, Date gmtModified) {
         this.id = id;
-        this.userCode = userCode;
-        this.userName = userName;
+        this.usercode = usercode;
+        this.username = username;
         this.password = password;
         this.salt = salt;
         this.isLocked = isLocked;
@@ -94,8 +94,8 @@ public class SysUserEntity {
     public String toString() {
         return "SysUserEntity{" +
                 "id='" + id + '\'' +
-                ", userCode='" + userCode + '\'' +
-                ", userName='" + userName + '\'' +
+                ", usercode='" + usercode + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", salt='" + salt + '\'' +
                 ", isLocked='" + isLocked + '\'' +

@@ -1,4 +1,4 @@
-package com.oliiyu.userservice.utils;
+package com.oliiyu.userservice.common.utils;
 
 import org.bouncycastle.util.encoders.Hex;
 

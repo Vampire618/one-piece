@@ -1,4 +1,4 @@
-package com.oliiyu.userservice.utils;
+package com.oliiyu.userservice.common.security;
 
 import com.oliiyu.userservice.common.consts.JwtConst;
 import com.oliiyu.userservice.repository.entity.SysUserEntity;
@@ -14,9 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Auther: oliiyu
- * @Date: 2019/5/5 14:54
- * @Description:
+ * Author: oliiyu
+ * Date: 2019/5/5 14:54
+ * Description:
  */
 @Component
 public class JwtTokenUtil implements Serializable {
