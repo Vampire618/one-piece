@@ -20,20 +20,23 @@ public class JwtUser implements UserDetails {
     private final String id;
     private final String username;
     private final String password;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     public JwtUser(
             String id,
             String username,
-            String password) {
+            String password,
+            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.authorities = authorities;
     }
 
     //返回分配给用户的角色列表
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @JsonIgnore
