@@ -21,9 +21,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * Date: 2019/5/6 15:17
  * Description: 为了让Spring可以知道我们想怎样控制安全性，我们还需要建立一个安全配置类 WebSecurityConfig ：
  */
-@Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@Configuration      // 标识配置类
+@EnableWebSecurity  // 开启 Security 服务
+@EnableGlobalMethodSecurity(prePostEnabled = true)// 开启全局 Securtiy 注解
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
@@ -32,11 +32,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    @Bean
-    @Override
-    protected UserDetailsService userDetailsService() {
-        return super.userDetailsService();
-    }
+//    @Bean
+//    @Override
+//    protected UserDetailsService userDetailsService() {
+//        return super.userDetailsService();
+//    }
 
     @Bean
     public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
@@ -44,14 +44,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     // Spring会自动寻找同样类型的具体类注入，这里就是JwtUserDetailsServiceImpl了
+//    @Autowired
+//    private UserDetailsService userDetailsService;
     @Autowired
-    private UserDetailsService userDetailsService;
+    private JwtUserDetailsServiceImpl jwtUserDetailsServiceImpl;
 
     @Autowired
     public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
                 // 设置UserDetailsService
-                .userDetailsService(this.userDetailsService)
+                .userDetailsService(this.jwtUserDetailsServiceImpl)
                 // 使用BCrypt进行密码的hash
                 .passwordEncoder(passwordEncoder());
     }
@@ -86,7 +88,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.js"
                 ).permitAll()
                 // 对于获取token的rest api要允许匿名访问
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/demo/**").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated();
 

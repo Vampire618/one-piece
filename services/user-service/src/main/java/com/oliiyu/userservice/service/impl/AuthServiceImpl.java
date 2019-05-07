@@ -16,6 +16,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.UUID;
+
 /**
  * Author: Oliiyu
  * Date: 2019/5/5 15:53
@@ -53,18 +56,20 @@ public class AuthServiceImpl implements AuthService {
      * @return
      */
     @Override
-    public SysUserEntity register(SysUserEntity sysUserToAdd) {
+    public Integer register(SysUserEntity sysUserToAdd) {
         final String username = sysUserToAdd.getUsername();
-//        if (sysUserMapper.findBySysUsername(username) != null) {
-//            return null;
-//        }
+        if (sysUserMapper.findBySysUsername(username) != null) {
+            return null;
+        }
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         final String rawPassword = sysUserToAdd.getPassword();
         sysUserToAdd.setPassword(encoder.encode(rawPassword));
+        sysUserToAdd.setId(UUID.randomUUID().toString());
+        sysUserToAdd.setGmtCreate(new Date(System.currentTimeMillis()));
 //        userToAdd.setLastPasswordResetDate(new Date());
 //        userToAdd.setRoles(asList("ROLE_USER"));
-//        return sysUserMapper.addSysUser(sysUserToAdd);
-        return sysUserMapper.getAllSysUser().get(0);
+        return sysUserMapper.addSysUser(sysUserToAdd);
+//        return sysUserMapper.getAllSysUser().get(0);
     }
 
     /**

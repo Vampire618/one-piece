@@ -18,4 +18,9 @@ public class SysUserServiceImpl implements SysUserService {
     public List<SysUserEntity> getAllSysUser() {
         return sysUserMapper.getAllSysUser();
     }
+
+    @Override
+    public Integer addSysUser(SysUserEntity sysUserEntity) {
+        return sysUserMapper.addSysUser(sysUserEntity);
+    }
 }

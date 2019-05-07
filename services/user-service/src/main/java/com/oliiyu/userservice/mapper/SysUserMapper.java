@@ -12,5 +12,5 @@ public interface SysUserMapper {
 
     SysUserEntity findBySysUsername(String username);
 
-    SysUserEntity addSysUser(SysUserEntity sysUserEntity);
+    Integer addSysUser(SysUserEntity sysUserEntity);
 }
