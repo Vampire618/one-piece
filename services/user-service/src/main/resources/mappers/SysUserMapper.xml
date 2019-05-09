@@ -10,7 +10,7 @@
             resultType="com.oliiyu.userservice.repository.entity.SysUserEntity">
       select id, usercode, username, password, salt, is_locked, gmt_create, gmt_modified
       from sys_user
-      where user_name = '1'
+      where username = #{username}
     </select>
 
     <insert id="addSysUser" parameterType="com.oliiyu.userservice.repository.entity.SysUserEntity">

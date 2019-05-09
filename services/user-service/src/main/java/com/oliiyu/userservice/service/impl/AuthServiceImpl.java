@@ -56,7 +56,7 @@ public class AuthServiceImpl implements AuthService {
      * @return
      */
     @Override
-    public Integer register(SysUserEntity sysUserToAdd) {
+    public SysUserEntity register(SysUserEntity sysUserToAdd) {
         final String username = sysUserToAdd.getUsername();
         if (sysUserMapper.findBySysUsername(username) != null) {
             return null;
@@ -68,8 +68,8 @@ public class AuthServiceImpl implements AuthService {
         sysUserToAdd.setGmtCreate(new Date(System.currentTimeMillis()));
 //        userToAdd.setLastPasswordResetDate(new Date());
 //        userToAdd.setRoles(asList("ROLE_USER"));
-        return sysUserMapper.addSysUser(sysUserToAdd);
-//        return sysUserMapper.getAllSysUser().get(0);
+        sysUserMapper.addSysUser(sysUserToAdd);
+        return sysUserToAdd;
     }
 
     /**
