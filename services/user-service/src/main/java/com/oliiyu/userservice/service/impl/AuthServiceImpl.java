@@ -2,6 +2,7 @@ package com.oliiyu.userservice.service.impl;
 
 import com.oliiyu.userservice.common.security.JwtTokenUtil;
 import com.oliiyu.userservice.common.security.JwtUser;
+import com.oliiyu.userservice.common.security.JwtUserDetailsServiceImpl;
 import com.oliiyu.userservice.mapper.SysUserMapper;
 import com.oliiyu.userservice.repository.entity.SysUserEntity;
 import com.oliiyu.userservice.service.AuthService;
@@ -30,7 +31,8 @@ import java.util.UUID;
 public class AuthServiceImpl implements AuthService {
 
     private AuthenticationManager authenticationManager;
-    private UserDetailsService userDetailsService;
+//    private UserDetailsService userDetailsService;
+    private JwtUserDetailsServiceImpl jwtUserDetailsServiceImpl;
     private JwtTokenUtil jwtTokenUtil;
     private SysUserMapper sysUserMapper;
 
@@ -40,11 +42,11 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     public AuthServiceImpl(
             AuthenticationManager authenticationManager,
-            UserDetailsService userDetailsService,
+            JwtUserDetailsServiceImpl jwtUserDetailsServiceImpl,
             JwtTokenUtil jwtTokenUtil,
             SysUserMapper sysUserMapper) {
         this.authenticationManager = authenticationManager;
-        this.userDetailsService = userDetailsService;
+        this.jwtUserDetailsServiceImpl = jwtUserDetailsServiceImpl;
         this.jwtTokenUtil = jwtTokenUtil;
         this.sysUserMapper = sysUserMapper;
     }
@@ -93,7 +95,7 @@ public class AuthServiceImpl implements AuthService {
         final Authentication authentication = authenticationManager.authenticate(upToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        final UserDetails userDetails = jwtUserDetailsServiceImpl.loadUserByUsername(username);
         final String token = jwtTokenUtil.generateToken(userDetails);
         return token;
     }
@@ -108,7 +110,7 @@ public class AuthServiceImpl implements AuthService {
     public String refresh(String oldToken) {
         final String token = oldToken.substring(tokenHead.length());
         String username = jwtTokenUtil.getUsernameFromToken(token);
-        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
+        JwtUser user = (JwtUser) jwtUserDetailsServiceImpl.loadUserByUsername(username);
 //        if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
 //            return jwtTokenUtil.refreshToken(token);
 //        }
