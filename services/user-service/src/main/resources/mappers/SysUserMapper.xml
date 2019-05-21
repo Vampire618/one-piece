@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.oliiyu.userservice.mapper.SysUserMapper">
     <select id="getAllSysUser" resultType="com.oliiyu.userservice.repository.entity.SysUserEntity">
-      select id, usercode, username, password, salt, is_locked, gmt_create, gmt_modified
+      select id, usercode, username, password, last_password_reset_date, is_locked, gmt_create, gmt_modified
       from sys_user
     </select>
 
     <select id="findBySysUsername" parameterType="java.lang.String"
             resultType="com.oliiyu.userservice.repository.entity.SysUserEntity">
-      select id, usercode, username, password, salt, is_locked, gmt_create, gmt_modified
+      select id, usercode, username, password, last_password_reset_date, is_locked, gmt_create, gmt_modified
       from sys_user
       where username = #{username}
     </select>
 
     <insert id="addSysUser" parameterType="com.oliiyu.userservice.repository.entity.SysUserEntity">
-      insert into sys_user (id, usercode, username, password, gmt_create)
-      values (#{id}, #{usercode}, #{username}, #{password}, #{gmtCreate})
+      insert into sys_user (id, usercode, username, last_password_reset_date, password, gmt_create)
+      values (#{id}, #{usercode}, #{username}, #{last_password_reset_date}, #{password}, #{gmtCreate})
     </insert>
 
 </mapper>

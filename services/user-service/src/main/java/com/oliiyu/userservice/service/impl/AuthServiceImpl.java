@@ -1,7 +1,6 @@
 package com.oliiyu.userservice.service.impl;
 
 import com.oliiyu.userservice.common.security.JwtTokenUtil;
-import com.oliiyu.userservice.common.security.UserDetailsImpl;
 import com.oliiyu.userservice.common.security.UserDetailsServiceImpl;
 import com.oliiyu.userservice.mapper.SysUserMapper;
 import com.oliiyu.userservice.repository.entity.SysUserEntity;
@@ -30,7 +29,6 @@ import java.util.UUID;
 public class AuthServiceImpl implements AuthService {
 
     private AuthenticationManager authenticationManager;
-//    private UserDetailsService userDetailsService;
     private UserDetailsServiceImpl jwtUserDetailsServiceImpl;
     private JwtTokenUtil jwtTokenUtil;
     private SysUserMapper sysUserMapper;
@@ -64,7 +62,7 @@ public class AuthServiceImpl implements AuthService {
         sysUserToAdd.setPassword(encoder.encode(rawPassword));
         sysUserToAdd.setId(UUID.randomUUID().toString());
         sysUserToAdd.setGmtCreate(new Date(System.currentTimeMillis()));
-//        userToAdd.setLastPasswordResetDate(new Date());
+        sysUserToAdd.setLastPasswordResetDate(new Date());
 //        userToAdd.setRoles(asList("ROLE_USER"));
         sysUserMapper.addSysUser(sysUserToAdd);
         return sysUserToAdd;
@@ -98,11 +96,11 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String refresh(String oldToken) {
         final String token = oldToken.substring(tokenHead.length());
-        String username = jwtTokenUtil.getUsernameFromToken(token);
-        UserDetailsImpl user = (UserDetailsImpl) jwtUserDetailsServiceImpl.loadUserByUsername(username);
-//        if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
-//            return jwtTokenUtil.refreshToken(token);
-//        }
+//        String username = jwtTokenUtil.getUsernameFromToken(token);
+//        UserDetailsImpl user = (UserDetailsImpl) jwtUserDetailsServiceImpl.loadUserByUsername(username);
+        if (jwtTokenUtil.canTokenBeRefreshed(token)) {
+            return jwtTokenUtil.refreshToken(token);
+        }
         return jwtTokenUtil.refreshToken(token);
     }
 }

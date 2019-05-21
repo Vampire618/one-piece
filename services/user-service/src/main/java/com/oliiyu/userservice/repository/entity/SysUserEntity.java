@@ -9,8 +9,8 @@ public class SysUserEntity {
     private String usercode;
     private String username;
     private String password;
-    private String salt;
     private String isLocked;
+    private Date lastPasswordResetDate;
     private Date gmtCreate;
     private Date gmtModified;
 
@@ -46,12 +46,12 @@ public class SysUserEntity {
         this.password = password;
     }
 
-    public String getSalt() {
-        return salt;
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
     }
 
-    public void setSalt(String salt) {
-        this.salt = salt;
+    public void setLastPasswordResetDate(Date lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
     public String getIsLocked() {
@@ -78,13 +78,13 @@ public class SysUserEntity {
         this.gmtModified = gmtModified;
     }
 
-    public SysUserEntity(String id, String usercode, String username, String password, String salt,
+    public SysUserEntity(String id, String usercode, String username, String password, Date lastPasswordResetDate,
                          String isLocked, Date gmtCreate, Date gmtModified) {
         this.id = id;
         this.usercode = usercode;
         this.username = username;
         this.password = password;
-        this.salt = salt;
+        this.lastPasswordResetDate = lastPasswordResetDate;
         this.isLocked = isLocked;
         this.gmtCreate = gmtCreate;
         this.gmtModified = gmtModified;
@@ -97,7 +97,7 @@ public class SysUserEntity {
                 ", usercode='" + usercode + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", salt='" + salt + '\'' +
+                ", lastPasswordResetDate='" + lastPasswordResetDate + '\'' +
                 ", isLocked='" + isLocked + '\'' +
                 ", gmtCreate=" + gmtCreate +
                 ", gmtModified=" + gmtModified +
