@@ -1,7 +1,8 @@
 package com.oliiyu.userservice.controller;
 
-import com.oliiyu.userservice.common.security.JwtAuthenticationRequest;
-import com.oliiyu.userservice.common.security.JwtAuthenticationResponse;
+import com.oliiyu.userservice.common.security.AuthenticationRequest;
+import com.oliiyu.userservice.common.security.AuthenticationResponse;
+import com.oliiyu.userservice.common.security.JwtConst;
 import com.oliiyu.userservice.repository.entity.SysUserEntity;
 import com.oliiyu.userservice.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,34 +23,34 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 public class AuthController {
-    @Value("${jwt.header}")
-    private String tokenHeader;
+//    @Value("${jwt.header}")
+//    private String tokenHeader;
 
     @Autowired
     private AuthService authService;
 
-    @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
+    @RequestMapping(value = "/auth", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(
-            @RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
+            @RequestBody AuthenticationRequest authenticationRequest) throws AuthenticationException {
         final String token = authService.login(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
         // Return the token
-        return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+        return ResponseEntity.ok(new AuthenticationResponse(token));
     }
 
-    @RequestMapping(value = "${jwt.route.authentication.refresh}", method = RequestMethod.GET)
+    @RequestMapping(value = "/refresh", method = RequestMethod.GET)
     public ResponseEntity<?> refreshAndGetAuthenticationToken(
             HttpServletRequest request) throws AuthenticationException {
-        String token = request.getHeader(tokenHeader);
+        String token = request.getHeader(JwtConst.HEADER_STRING);
         String refreshedToken = authService.refresh(token);
         if (refreshedToken == null) {
             return ResponseEntity.badRequest().body(null);
         } else {
-            return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
+            return ResponseEntity.ok(new AuthenticationResponse(refreshedToken));
         }
     }
 
-    @RequestMapping(value = "${jwt.route.authentication.register}", method = RequestMethod.POST)
+    @RequestMapping(value = "/auth/register", method = RequestMethod.POST)
     public SysUserEntity register(@RequestBody SysUserEntity addedUser) throws AuthenticationException {
         return authService.register(addedUser);
     }

@@ -8,8 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import static com.oliiyu.userservice.common.security.JwtUserFactory.*;
-
 /**
  * Author: oliiyu
  * Date: 2019/5/6 15:09
@@ -18,7 +16,7 @@ import static com.oliiyu.userservice.common.security.JwtUserFactory.*;
  * 注意，不一定是数据库，文本文件、xml文件等等都可能成为数据源，这也是为什么Spring提供这样一个接口的原因：保证你可以采用灵活的数据源。
  */
 @Service
-public class JwtUserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private SysUserMapper sysUserMapper;
 
@@ -29,7 +27,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
         if (sysUser == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         } else {
-            return create(sysUser);
+            return UserDetailsFactory.create(sysUser);
         }
     }
 }

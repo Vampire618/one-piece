@@ -1,4 +1,4 @@
-package com.oliiyu.userservice.common.consts;
+package com.oliiyu.userservice.common.security;
 
 /**
  * @Auther: oliiyu
@@ -10,4 +10,7 @@ public class JwtConst {
     public static final String SECRET = "CodeSheepSecret";      // JWT密码
     public static final String TOKEN_PREFIX = "Bearer";         // Token前缀
     public static final String HEADER_STRING = "Authorization"; // 存放Token的Header Key
+
+    public static final String CLAIM_KEY_USERNAME = "sub";
+    public static final String CLAIM_KEY_CREATED = "created";
 }

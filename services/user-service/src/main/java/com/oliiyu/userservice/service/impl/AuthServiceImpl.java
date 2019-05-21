@@ -1,8 +1,8 @@
 package com.oliiyu.userservice.service.impl;
 
 import com.oliiyu.userservice.common.security.JwtTokenUtil;
-import com.oliiyu.userservice.common.security.JwtUser;
-import com.oliiyu.userservice.common.security.JwtUserDetailsServiceImpl;
+import com.oliiyu.userservice.common.security.UserDetailsImpl;
+import com.oliiyu.userservice.common.security.UserDetailsServiceImpl;
 import com.oliiyu.userservice.mapper.SysUserMapper;
 import com.oliiyu.userservice.repository.entity.SysUserEntity;
 import com.oliiyu.userservice.service.AuthService;
@@ -13,7 +13,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +31,7 @@ public class AuthServiceImpl implements AuthService {
 
     private AuthenticationManager authenticationManager;
 //    private UserDetailsService userDetailsService;
-    private JwtUserDetailsServiceImpl jwtUserDetailsServiceImpl;
+    private UserDetailsServiceImpl jwtUserDetailsServiceImpl;
     private JwtTokenUtil jwtTokenUtil;
     private SysUserMapper sysUserMapper;
 
@@ -42,7 +41,7 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     public AuthServiceImpl(
             AuthenticationManager authenticationManager,
-            JwtUserDetailsServiceImpl jwtUserDetailsServiceImpl,
+            UserDetailsServiceImpl jwtUserDetailsServiceImpl,
             JwtTokenUtil jwtTokenUtil,
             SysUserMapper sysUserMapper) {
         this.authenticationManager = authenticationManager;
@@ -53,9 +52,6 @@ public class AuthServiceImpl implements AuthService {
 
     /**
      * 注册
-     *
-     * @param sysUserToAdd
-     * @return
      */
     @Override
     public SysUserEntity register(SysUserEntity sysUserToAdd) {
@@ -76,10 +72,6 @@ public class AuthServiceImpl implements AuthService {
 
     /**
      * 登录
-     *
-     * @param username
-     * @param password
-     * @return
      */
     @Override
     public String login(String username, String password) {
@@ -102,15 +94,12 @@ public class AuthServiceImpl implements AuthService {
 
     /**
      * 刷新
-     *
-     * @param oldToken
-     * @return
      */
     @Override
     public String refresh(String oldToken) {
         final String token = oldToken.substring(tokenHead.length());
         String username = jwtTokenUtil.getUsernameFromToken(token);
-        JwtUser user = (JwtUser) jwtUserDetailsServiceImpl.loadUserByUsername(username);
+        UserDetailsImpl user = (UserDetailsImpl) jwtUserDetailsServiceImpl.loadUserByUsername(username);
 //        if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
 //            return jwtTokenUtil.refreshToken(token);
 //        }

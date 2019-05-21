@@ -7,11 +7,11 @@ import java.io.Serializable;
  * Date: 2019/5/6 15:44
  * Description:
  */
-public class JwtAuthenticationResponse implements Serializable {
+public class AuthenticationResponse implements Serializable {
 
     private final String token;
 
-    public JwtAuthenticationResponse(String token) {
+    public AuthenticationResponse(String token) {
         this.token = token;
     }
 

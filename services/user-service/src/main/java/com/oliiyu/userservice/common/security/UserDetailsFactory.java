@@ -13,17 +13,17 @@ import java.util.stream.Collectors;
  * Date: 2019/5/5 15:43
  * Description:
  */
-public class JwtUserFactory {
+public class UserDetailsFactory {
 
-    private JwtUserFactory() {
+    private UserDetailsFactory() {
     }
 
 
-    public static JwtUser create(SysUserEntity user) {
-        ArrayList<String> list = new ArrayList<String>();
+    public static UserDetailsImpl create(SysUserEntity user) {
+        ArrayList<String> list = new ArrayList<>();
         list.add("USER");
         list.add("ADMIN");
-        return new JwtUser(
+        return new UserDetailsImpl(
                 user.getId(),
                 user.getUsername(),
                 user.getPassword(),
