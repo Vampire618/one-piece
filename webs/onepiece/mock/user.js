@@ -96,7 +96,7 @@ export default {
       currentAuthority: 'guest',
     });
   },
-  'POST /api/register': (req, res) => {
+  'POST /api/register1': (req, res) => {
     res.send({ status: 'ok', currentAuthority: 'user' });
   },
   'GET /api/500': (req, res) => {

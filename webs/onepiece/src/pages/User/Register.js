@@ -50,7 +50,7 @@ class Register extends Component {
 
   componentDidUpdate() {
     const { form, register } = this.props;
-    const account = form.getFieldValue('mail');
+    const account = form.getFieldValue('email');
     if (register.status === 'ok') {
       router.push({
         pathname: '/user/register-result',
@@ -185,7 +185,7 @@ class Register extends Component {
         </h3>
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
-            {getFieldDecorator('mail', {
+            {getFieldDecorator('email', {
               rules: [
                 {
                   required: true,
@@ -261,7 +261,7 @@ class Register extends Component {
                 <Option value="86">+86</Option>
                 <Option value="87">+87</Option>
               </Select>
-              {getFieldDecorator('mobile', {
+              {getFieldDecorator('phoneNumber', {
                 rules: [
                   {
                     required: true,
@@ -287,7 +287,7 @@ class Register extends Component {
                 {getFieldDecorator('captcha', {
                   rules: [
                     {
-                      required: true,
+                      required: false,
                       message: formatMessage({ id: 'validation.verification-code.required' }),
                     },
                   ],
