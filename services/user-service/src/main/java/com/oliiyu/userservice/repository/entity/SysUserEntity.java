@@ -6,9 +6,10 @@ import java.util.Date;
 public class SysUserEntity {
 
     private String id;
-    private String usercode;
+    private String email;
     private String username;
     private String password;
+    private String phoneNumber;
     private String isLocked;
     private Date lastPasswordResetDate;
     private Date gmtCreate;
@@ -22,12 +23,20 @@ public class SysUserEntity {
         this.id = id;
     }
 
-    public String getUsercode() {
-        return usercode;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsercode(String usercode) {
-        this.usercode = usercode;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getUsername() {
@@ -44,14 +53,6 @@ public class SysUserEntity {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Date getLastPasswordResetDate() {
-        return lastPasswordResetDate;
-    }
-
-    public void setLastPasswordResetDate(Date lastPasswordResetDate) {
-        this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
     public String getIsLocked() {
@@ -78,29 +79,29 @@ public class SysUserEntity {
         this.gmtModified = gmtModified;
     }
 
-    public SysUserEntity(String id, String usercode, String username, String password, Date lastPasswordResetDate,
-                         String isLocked, Date gmtCreate, Date gmtModified) {
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
+    }
+
+    public void setLastPasswordResetDate(Date lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
+    }
+
+    public SysUserEntity(String id, String email, String username, String password, String phoneNumber,
+                         String isLocked, Date lastPasswordResetDate, Date gmtCreate, Date gmtModified) {
         this.id = id;
-        this.usercode = usercode;
+        this.email = email;
         this.username = username;
         this.password = password;
-        this.lastPasswordResetDate = lastPasswordResetDate;
+        this.phoneNumber = phoneNumber;
         this.isLocked = isLocked;
+        this.lastPasswordResetDate = lastPasswordResetDate;
         this.gmtCreate = gmtCreate;
         this.gmtModified = gmtModified;
     }
 
     @Override
     public String toString() {
-        return "SysUserEntity{" +
-                "id='" + id + '\'' +
-                ", usercode='" + usercode + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", lastPasswordResetDate='" + lastPasswordResetDate + '\'' +
-                ", isLocked='" + isLocked + '\'' +
-                ", gmtCreate=" + gmtCreate +
-                ", gmtModified=" + gmtModified +
-                '}';
+        return super.toString();
     }
 }

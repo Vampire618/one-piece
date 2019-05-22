@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2019/5/21 16:10:33                           */
+/* Created on:     2019/5/22 17:09:48                           */
 /*==============================================================*/
 
 
@@ -71,9 +71,10 @@ alter table sys_role_permission comment '角色权限关系表';
 create table sys_user
 (
    id                   varchar(64) not null comment '主键',
-   usercode             varchar(32) not null comment '账号',
-   username             varchar(32) not null comment '姓名',
-   password             varchar(32) comment '密码',
+   email                varchar(64) comment '邮箱',
+   username             varchar(64) comment '用户名',
+   password             varchar(64) comment '密码',
+   phone_number         varchar(16) comment '联系电话',
    is_locked            varchar(1) comment '账号是否锁定，1：锁定，0未锁定',
    last_password_reset_date datetime comment '上次密码重置时间',
    gmt_create           datetime comment '创建时间',

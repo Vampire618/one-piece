@@ -53,7 +53,7 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public SysUserEntity register(SysUserEntity sysUserToAdd) {
-        final String username = sysUserToAdd.getUsername();
+        final String username = sysUserToAdd.getEmail();
         if (sysUserMapper.findBySysUsername(username) != null) {
             return null;
         }
@@ -62,7 +62,7 @@ public class AuthServiceImpl implements AuthService {
         sysUserToAdd.setPassword(encoder.encode(rawPassword));
         sysUserToAdd.setId(UUID.randomUUID().toString());
         sysUserToAdd.setGmtCreate(new Date(System.currentTimeMillis()));
-        sysUserToAdd.setLastPasswordResetDate(new Date());
+        sysUserToAdd.setLastPasswordResetDate(new Date(System.currentTimeMillis()));
 //        userToAdd.setRoles(asList("ROLE_USER"));
         sysUserMapper.addSysUser(sysUserToAdd);
         return sysUserToAdd;

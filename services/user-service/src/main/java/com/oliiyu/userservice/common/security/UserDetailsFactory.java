@@ -25,7 +25,7 @@ public class UserDetailsFactory {
         list.add("ADMIN");
         return new UserDetailsImpl(
                 user.getId(),
-                user.getUsername(),
+                user.getEmail(),
                 user.getPassword(),
                 mapToGrantedAuthorities(list)
         );

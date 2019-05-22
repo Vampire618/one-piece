@@ -3,6 +3,7 @@ package com.oliiyu.userservice.controller;
 import com.oliiyu.userservice.common.security.AuthenticationRequest;
 import com.oliiyu.userservice.common.security.AuthenticationResponse;
 import com.oliiyu.userservice.common.security.JwtConst;
+import com.oliiyu.userservice.common.utils.GeneralMessage;
 import com.oliiyu.userservice.repository.entity.SysUserEntity;
 import com.oliiyu.userservice.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class AuthController {
     @RequestMapping(value = "/auth", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(
             @RequestBody AuthenticationRequest authenticationRequest) throws AuthenticationException {
-        final String token = authService.login(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        final String token = authService.login(authenticationRequest.getEmail(), authenticationRequest.getPassword());
 
         // Return the token
         return ResponseEntity.ok(new AuthenticationResponse(token));
@@ -50,8 +51,9 @@ public class AuthController {
         }
     }
 
-    @RequestMapping(value = "/auth/register", method = RequestMethod.POST)
-    public SysUserEntity register(@RequestBody SysUserEntity addedUser) throws AuthenticationException {
-        return authService.register(addedUser);
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public GeneralMessage register(@RequestBody SysUserEntity addedUser) throws AuthenticationException {
+        SysUserEntity user = authService.register(addedUser);
+        return new GeneralMessage(0, "操作成功！", user);
     }
 }

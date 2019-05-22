@@ -99,7 +99,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
 
                 // 对于获取token的rest api要允许匿名访问
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/auth/**", "/register/**").permitAll()
 
 //                .antMatchers("/admin").hasAuthority("admin")    // 需拥有 admin 这个权限
 //                .antMatchers("/ADMIN").hasRole("ADMIN")         // 需拥有 ADMIN 这个身份
