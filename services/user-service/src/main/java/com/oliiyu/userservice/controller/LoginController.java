@@ -1,15 +1,16 @@
 package com.oliiyu.userservice.controller;
 
-import com.oliiyu.userservice.mapper.SysUserMapper;
-import com.oliiyu.userservice.repository.entity.SysUserEntity;
+import com.oliiyu.userservice.common.CommonResult;
+import com.oliiyu.userservice.common.security.AuthenticationRequest;
+import com.oliiyu.userservice.service.AuthService;
 import com.oliiyu.userservice.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/login")
@@ -19,20 +20,25 @@ public class LoginController {
     private SysUserService sysUserService;
 
     @Autowired
-    private SysUserMapper sysUserMapper;
+    private AuthService authService;
 
-    @RequestMapping(value = "/do", method = RequestMethod.GET)
-    public List<SysUserEntity> systemLogin() {
-        return sysUserService.getAllSysUser();
+
+    @RequestMapping(value = "/accounts", method = RequestMethod.GET)
+    public CommonResult getAccounts() {
+        return CommonResult.success(sysUserService.getAllSysUser());
     }
 
-//    @RequestMapping(value = "login.do", method = RequestMethod.POST)
-//    public ServerResponse<UserDetailsImpl> login(String username, String password, HttpSession session) {
-//        ServerResponse<UserDetailsImpl> response = iUserService.login(username, password);
-//        if (response.isSuccess()) {
-//            session.setAttribute(Const.CURRENT_USER, response.getData());
-//        }
-//        return response;
-//    }
+    @RequestMapping(value = "/accounts2", method = RequestMethod.GET)
+    public ResponseEntity<?> getAccounts2() {
+        return ResponseEntity.ok(sysUserService.getAllSysUser());
+    }
+
+    @RequestMapping(value = "/account", method = RequestMethod.POST)
+    public CommonResult login(@RequestBody AuthenticationRequest authenticationRequest)
+            throws AuthenticationException {
+        final String token = authService.login(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        return CommonResult.success(token);
+    }
+
 
 }

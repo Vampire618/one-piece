@@ -30,7 +30,7 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.setContentType("application/json");
 
-        httpServletResponse.getWriter().println("{\"code\":401,\"message\":\"token无效！\",\"data\":\"\"}");
+        httpServletResponse.getWriter().println("{\"code\":401,\"message\":\"未登录或token无效！\",\"data\":\"\"}");
         httpServletResponse.getWriter().flush();
     }
 }

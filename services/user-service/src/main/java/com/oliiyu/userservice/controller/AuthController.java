@@ -1,13 +1,12 @@
 package com.oliiyu.userservice.controller;
 
+import com.oliiyu.userservice.common.CommonResult;
 import com.oliiyu.userservice.common.security.AuthenticationRequest;
 import com.oliiyu.userservice.common.security.AuthenticationResponse;
 import com.oliiyu.userservice.common.security.JwtConst;
-import com.oliiyu.userservice.common.utils.GeneralMessage;
 import com.oliiyu.userservice.repository.entity.SysUserEntity;
 import com.oliiyu.userservice.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,8 +51,8 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public GeneralMessage register(@RequestBody SysUserEntity addedUser) throws AuthenticationException {
+    public CommonResult register(@RequestBody SysUserEntity addedUser) throws AuthenticationException {
         SysUserEntity user = authService.register(addedUser);
-        return new GeneralMessage(0, "操作成功！", user);
+        return CommonResult.success(user);
     }
 }
