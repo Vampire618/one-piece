@@ -3,8 +3,6 @@ package com.oliiyu.userservice.common.durid;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -23,13 +21,13 @@ import java.sql.SQLException;
  */
 @Configuration
 public class DruidConfig {
-    private final Logger logger = LoggerFactory.getLogger(DruidConfig.class);
+//    private final Logger logger = LoggerFactory.getLogger(DruidConfig.class);
 
     private final String DB_PREFIX = "spring.datasource";
 
     @Bean
     public ServletRegistrationBean statViewServlet() {
-        logger.info("init Druid Servlet Configuration");
+//        logger.info("init Druid Servlet Configuration");
         ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(
                 new StatViewServlet(), "/druid/*");
 
