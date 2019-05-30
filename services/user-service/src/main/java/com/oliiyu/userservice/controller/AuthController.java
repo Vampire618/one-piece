@@ -6,6 +6,9 @@ import com.oliiyu.userservice.common.security.AuthenticationResponse;
 import com.oliiyu.userservice.common.security.JwtConst;
 import com.oliiyu.userservice.repository.entity.SysUserEntity;
 import com.oliiyu.userservice.service.AuthService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
@@ -21,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * Date: 2019/5/5 15:47
  * Description:
  */
+@Api("权限验证类")
 @RestController
 public class AuthController {
 //    @Value("${jwt.header}")
@@ -50,6 +54,7 @@ public class AuthController {
         }
     }
 
+    @ApiOperation("用户注册")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public CommonResult register(@RequestBody SysUserEntity addedUser) throws AuthenticationException {
         SysUserEntity user = authService.register(addedUser);
