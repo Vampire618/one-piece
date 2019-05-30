@@ -76,7 +76,7 @@ public class CommonResult<T> {
      * @param message 提示信息
      */
     public static <T> CommonResult<T> validateFailed(String message) {
-        return new CommonResult<>(HttpStatus.NOT_FOUND.value(), message, null);
+        return new CommonResult<>(HttpStatus.BAD_REQUEST.value(), message, null);
     }
 
     /**

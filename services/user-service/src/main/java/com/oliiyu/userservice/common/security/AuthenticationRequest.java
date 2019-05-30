@@ -1,5 +1,7 @@
 package com.oliiyu.userservice.common.security;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 /**
@@ -9,9 +11,16 @@ import java.io.Serializable;
  */
 public class AuthenticationRequest implements Serializable {
 
+    @Email(message = "邮件格式错误")
     private String email;
+
+    @Pattern(regexp = "^[A-Za-z0-9_]{8,64}$", message = "用户名格式错误")
     private String username;
+
+    @Pattern(regexp = "^(?![A-Z]+$)(?![a-z]+$)(?!\\d+$)(?![\\W_]+$)\\S{6,16}$", message = "密码格式错误")
     private String password;
+
+    @Pattern(regexp = "^1(3|4|5|7|8)\\\\d{9}$", message = "手机号码格式错误")
     private String phoneNumber;
 
     public AuthenticationRequest() {
